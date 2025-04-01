@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParse = require('body-parser')
 const cors = require('cors')
+const req = require('express/lib/request')
 require('dotenv').config()
 
 app.use(cors())
@@ -44,12 +45,17 @@ app.post('/api/users', (req, res)=> {
 
 })
 
+
+
 app.get('/api/users', (req, res)=>{
   res.send(bd);
 });
 
 
-
+app.post('/api/users/:_id/exercises', (req, res)=>{
+  const {description, duration, date} = req.body
+  (date === undefined) ? date = new Date() : date = date  
+})
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
